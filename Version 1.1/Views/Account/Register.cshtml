@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register | Welcome To Finch</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Register_Style.css">
+    <link rel="icon" href="~/Images/Light/Icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <main>
+
+        <h1 class="Page-Head">Welcome To The System</h1>
+
+        <div class="container">
+
+            <div class="details">
+                <!--- Firstname Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="First-Name">First Name:</label>
+                    <input class="input" id="First-Name" type="text" name="First-Name" placeholder="e.g. John/Jane">
+                </div>
+
+                <!--- Surname Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="Last-Name">Last Name:</label>
+                    <input class="input" id="Last-Name" type="text" name="Last-Name" placeholder="e.g. Doe">
+                </div>
+
+                <!--- Username Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="Username">Username:</label>
+                    <input class="input" id="Username" type="text" name="Username" placeholder="e.g. user123">
+                </div>
+
+                <!--- Password Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="Password">Password:</label>
+                    <input class="input" id="Password" type="text" name="Password" placeholder="e.g. P@ssw0rd123">
+                </div>
+            </div>
+
+            <div class="roles">
+                <!--- Role Selection Field --->
+                <div class="roles-header">
+                    <p>Please Indicate Your Position<br>Before Submitting:</p>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="position" value="contractor" checked>
+                    <label>Independent Contractor</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="position" value="programme">
+                    <label>Programme Coordinator</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="position" value="academic">
+                    <label>Academic Manager</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="Button-Row">
+            <button class="submit-button" type="submit" onclick="window.location.href='Dashboard_Lecturer.html'">✔ Submit</button>
+            <button class="cancel-button" type="reset" onclick="window.location.href='Login.html'">✖ Cancel</button>
+        </div>
+    </main>
+</body>
+
+</html>

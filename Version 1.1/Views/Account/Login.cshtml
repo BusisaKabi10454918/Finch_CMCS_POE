@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login | Welcome Back</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Login_Style.css">
+    <link rel="icon" href="~/Images/Light/Icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <main>
+        <h1 class="Page-Head">Welcome Back To The System</h1>
+
+
+        <div class="Login-Container">
+            <form class="Login-Form" method="post" action="">
+                <!--- Username Field --->
+                <div class="Entry-Field">
+                    <!--<label class="label" for="Username">Username:</label>-->
+                    <input class="input" id='username-field' label="Username" type="text" name="username" placeholder="Enter Username">
+                </div>
+                <br>
+                <br>
+                <!--Password Field-->
+                <div class="Entry-Field">
+                    <!--<label class="label" for="Password">Password:</label>-->
+                    <input class="input" id='password-field' label="Password" type="password" name="password" placeholder="Enter Password">
+                </div>
+
+                <div class="Button-Row">
+                    <button class="submit-button" type="submit" onclick="window.location.href='Dashboard_Lecturer.html'">Login</button>
+                    <button class="reset-button" type="reset" onclick=>Reset Password</button>
+                </div>
+            </form>
+
+        </div>
+
+        <p class="register-link">Unregistered? Create a profile <a rel="Register" href="Register.html">here</a></p>
+
+    </main>
+</body>
+
+</html>
