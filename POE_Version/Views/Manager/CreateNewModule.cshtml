@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Module>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add New Module";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add New Module</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Module_Form_Style.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <div class="title">New Module</div>
+
+    <div class="container">
+
+        <form class="details" method="post" asp-controller="Manager" asp-action="NewModule">
+            <!-- Form fields for adding a new module would go here -->
+            <!--Module Code-->
+            <div class="Entry-Field">
+                <label class="label" for="moduleCode">Module Code:</label>
+                <input class="input" id="moduleCode" type="text" name="moduleCode" placeholder="e.g. ABCD1234" required>
+            </div>
+
+            <!--- Module Name Field --->
+            <div class="Entry-Field">
+                <label class="label" for="moduleName">Module Name:</label>
+                <input class="input" id="moduleName" type="text" name="moduleName" placeholder="e.g. Introduction to ABC Corporate Activities" required>
+            </div>
+
+            <!--- Lecturer Rate Field --->
+            <div class="Entry-Field">
+                <label class="label" for="moduleRate">Standard Rate(R/hr):</label>
+                <input class="input" id="moduleRate" type="number" name="moduleRate" placeholder="0.00" step="50.00" max="500" required>
+            </div>
+
+            <div class="Button-Row">
+                <button class="add-button" type="submit">Add Module</button>
+                <button class="return-button" type="button" action="window.location='@Url.Action("ViewModules", "Manager")">Return</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

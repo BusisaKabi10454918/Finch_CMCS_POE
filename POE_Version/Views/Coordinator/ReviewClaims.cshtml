@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Claim>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Claims</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Claim_View_General_Style.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    
+
+    <div class="container">
+        <h2 class="header">Unchecked Claims</h2>
+        <!-- Scrollable Claims List -->
+        <div class="claims-list">
+            @foreach (var claim in Model)
+            {
+                <div class="Claim">
+                    <div class="claim-header">
+                        @claim.ModuleCode | (@claim.ClaimedHours.ToString()) | (@claim.ClaimAmount.ToString())
+                    </div>
+                    <div class="claim-details">
+                        Claimant: @claim.Lecturer.FirstName @claim.Lecturer.LastName<br>
+                        ClaimID: @claim.ClaimReadID
+                    </div>
+                    <div class="claim-details">
+                        Claim Period:@claim.ClaimPeriodStart.ToString("dd/MM/yyyy") to @claim.ClaimPeriodEnd.ToString("dd/MM/yyyy")
+                    </div>
+
+                    <div class="Button-Row">
+                        <form method="post" action="/Coordinator/ApproveClaim">
+                            <input type="hidden" name="claimReadID" value="@claim.ClaimReadID" />
+                            <button class="approve-button" type="submit">Approve</button>
+                        </form>
+
+                        <form method="post" action="/Coordinator/EscalateClaim">
+                            <input type="hidden" name="claimReadID" value="@claim.ClaimReadID" />
+                            <input type="text" name="reason" placeholder="Reason for escalation (Optional)" />
+                            <button class="return-button" type="submit">Escalate</button>
+                        </form>
+
+                        <form method="post" action="/Coordinator/RejectClaim">
+                            <input type="hidden" name="claimReadID" value="@claim.ClaimReadID" />
+                            <input type="text" name="reason" placeholder="Reason for rejection" required />
+                            <button class="reject-button" type="submit">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            }
+            <!-- More claims will stack here and remain scrollable -->
+        </>
+    </div>
+
+    <div class="Button-Row">
+        <button class="return-button" onclick="window.location='@Url.Action("CoordinatorDash", "Coordinator")"> Return</button>
+    </div>
+</body>
+</html>

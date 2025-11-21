@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Claims</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Claim_View_General_Style.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    @if (TempData["NoClaimsMessage"] != null)
+    {
+        <script>
+            window.onload = function() {
+                alert("@TempData["NoClaimsMessage"]");
+            };
+        </script>
+    }
+
+    @model IEnumerable<Claim>
+
+    <div class="container">
+
+        <h2 class="header">Claims</h2>
+
+        <!-- Scrollable Claims List -->
+        <div class="claims-list">
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var claim in Model)
+                {
+                    <div class="claim-accepted">
+                        <div class="claim-header">
+                            @claim.ModuleCode | (@claim.ClaimedHours.ToString()) | (@claim.ClaimAmount.ToString())
+                        </div>
+                        <div class="claim-details">
+                            Claimant: @claim.Lecturer.FirstName @claim.Lecturer.LastName<br>
+                            ClaimID: @claim.ClaimReadID
+                        </div>
+                        <div class="claim-details">
+                            Claim Period:@claim.ClaimPeriodStart.ToString("dd/MM/yyyy") to @claim.ClaimPeriodEnd.ToString("dd/MM/yyyy")
+                            Claim Status: @claim.ClaimStatus | @claim.AdminComments
+                        </div>
+                    </div>
+                }               
+            }else
+            {
+                <div class="no-claims">
+                    <p>No claims available for this status.</p>
+                </div>
+            }    
+            <!-- More claims will stack here and remain scrollable -->
+        </div>
+        <!-- Action Buttons -->
+    </div>
+
+    <div class="Button-Row">
+        <form asp-controller="HumanResources" asp-action="DownloadReport">
+            <button class="return-button" type="submit" name="reviewContext" value="AcceptContext">Download</button>
+            <button class="return-button" onclick="window.location='@Url.Action("HumanResourcesDash", "HumanResources")'">Return</button>
+        </form>
+    </div>
+</body>
+</html>

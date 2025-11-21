@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Contract>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Contracts";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contracts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Contract_Management_Style.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+
+        <div class="title">Contracted Lecturers:</div>
+
+        <div class="panel">
+
+            <div class="contracts">
+                @if (Model != null && Model.Any())
+                {
+
+                foreach (var contract in Model)
+                {
+                <div class="contract-card">
+                    <div class="contract-card-left">
+                        <div class="contract-signatory">@contract.ContractedLecturer</div>
+                        <div class="assigned-modules">Assigned Modules: @contract.GetAssignedModulesAsString()</div>
+                    </div>
+                    <div class="contract-card-right">
+                        <div class="expiry-label"> Contract Expiry: @contract.ExpiryDate</div>
+                        <div class="contract-actions">
+                            <form method="post" asp-controller="HumanResources" asp-action="ViewContractDetails">
+                                <input type="hidden" name="@contract.ContractID"/>
+                                <button class="release-button" type="submit" onclick="window.location='@Url.Action("FeatureUnderDevView", "General")'"> Release Lecturer </button>
+                            </form>
+                            <form method="post" asp-controller="HumanResources" asp-action="AdjustContractView">
+                                <input type="hidden" name="@contract.ContractID" value="1" />
+                                <button class="adjust-button" type="submit" onclick="window.location='@Url.Action("FeatureUnderDevView", "General")'"> Adjust Contract </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-entries">
+                        <p>No contracts in the system</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="Button-Row">
+            <button class="return-button" onclick="window.location='@Url.Action("HumanResourcesDash", "HumanResources")'">Return</button>
+        </div>
+
+    </div>
+
+</body>
+</html>

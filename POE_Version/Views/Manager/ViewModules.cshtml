@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PROG.Models.Module>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Module Listing";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Modules</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Module_View_Style.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+
+        <div class="title"> Available Modules:</div>
+
+        <div class="panel">
+
+            <div class="modules">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var module in Model)
+                    {
+                        <div class="module-card">
+                            <div class="module-card-left">
+                                <div class="module-code"> @module.ModuleCode</div>
+                                <div class="module-name"> @module.ModuleName</div>
+                            </div>
+                            <div class="module-card-right">
+                                <div class="rate-label"> Std. Rate: R @module.ModuleRatePerHour /hr </div>
+                                <div class="module-actions">
+                                    <button class="delist-button" action="window.location='@Url.Action("FeatureUnderDevelopment", "General")">Delist Module</button>
+                                    <button class="modify-button" action="window.location='@Url.Action("FeatureUnderDevelopment", "General")">Modify Info</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-entries">
+                        <p>No modules added to the system.</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="Button-Row">
+            <button class="add-button" onclick="window.location='@Url.Action("CreateNewModule", "Manager")'">Add New Module</button>
+            <button class="return-button" onclick="window.location='@Url.Action("ManagerDash", "Manager")'">Return</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
+

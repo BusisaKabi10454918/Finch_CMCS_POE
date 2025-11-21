@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Dashboard_Styles.css">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <main>
+        <div class="corner-top-left">?</div>
+        <form asp-action="Logout" asp-controller="General" method="post">
+            <button class="corner-top-right">☰</button>
+        </form>
+
+        <div class="task-container">
+
+            <div class="task">
+                <a href="@Url.Action("FeatureUnderDevelopment", "General")">
+                    <img src="~/Images/Light/Buttons/Examine_Claims_Docs_Light_Buttons.png" alt="ExamineDocumentation">
+                </a>
+            </div>
+
+            <div class="task">
+                <a href="@Url.Action("ReviewEscalatedClaims", "Manager")">
+                    <img src="~/Images/Light/Buttons/Review_Esc_Claims_Light_Buttons.png" alt="ReviewEscalatedClaims">
+                </a>
+            </div>
+
+            <div class="task">
+                <a href="@Url.Action("ViewModules", "Manager")">
+                    <img src="~/Images/Light/Buttons/Adjust_Module_Listing_Light.png" alt="AdjustModules">
+                </a>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,182 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Create Claim";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>New Claim</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="~/css/Create_Claim_Style.css">
+        <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div class="corner-top-left">?</div>
+        <div class="corner-top-right">☰</div>
+        <h1 class="header">Create New Claim</h1>
+        
+
+        <div class="container">
+
+        <form id="claimForm" asp-controller="Lecturer" asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+
+            <div class="form-container">
+                
+                <!--Date Field: Auto Filled and Unchangeble-->
+                <div class="Entry-Field">
+                    <label class="label" for="submissionDate">Date:</label>
+                    <input class="input" id="submissionDate" name="submissionDate"type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
+                </div>
+                            
+                <!--- Sessions Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="sessions">No. of Sessions (Hrs):</label>
+                    <input class="input" name="sessions" id="sessions" type="number" placeholder="0" min="0" required>
+                </div>
+                        
+                <!--- Programme Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="moduleCode">Module:</label>
+                    <select class="input" id="moduleCode" type="text" name="moduleCode" placeholder="">
+                        <option value="BUIS5111">BUIS5111: Business Information Systems</option>
+                        <option value="DATA6211">DATA6211: Database (Introduction)</option>
+                        <option value="DATA6222">DATA6222: Database (Intermediate)</option>
+                        <option value="HCIN6222">HCIN6222: Human Computer Interaction</option>
+                        <option value="IPMA6212">IPMA6212: IT Project Management</option>                        
+                        <option value="ISEC6321">ISEC6321: Information Security</option>
+                        <option value="ITPP5121">ITPP5121: IT Professional Practice</option>
+                        <option value="IQTT5111">IQTT5111: Introduction to Quantitive Thinking and Techniques</option>
+                        <option value="OPSY5121">OPSY5121: Operating Systems 1A</option>                        
+                        <option value="PRLD5121">PRLD5121: Programming Logic and Design</option>
+                        <option value="PROG5121">PROG5121: Programming 1A</option>
+                        <option value="PROG6111">PROG6112: Programming 1B</option>
+                        <option value="PROG6112">PROG6221: Programming 2A</option>
+                        <option value="PROG6212">PROG6212: Programming 2B</option>
+                        <option value="WEDE5020">WEDE5020: Web Development (Introduction)</option>
+                        <option value="SAND6221">SAND6221: Systems Analysis and Design</option>
+                    </select>
+                </div>
+                            
+                <!--- Claim Period Field --->
+                <div class="Entry-Field">
+                    <label class="label" for="claimStartDate">Claim Period:</label>
+                    <div class="Claim-Date-Range">
+                        <input class="input" id="claimStartDate" name="claimStartDate" type="date" required> to <input class="input" id="claimEndDate" name="claimEndDate" type="date" required>
+                    </div>
+                </div>
+
+                <!-- Documents Field -->
+                <div class="Entry-Field">
+                    <label class="label" for="supportingDocuments">Supporting Documents:</label>
+                    <input class="input" id="supportingDocuments" name="supportingDocuments" 
+                        type="file" multiple 
+                        accept=".pdf,.doc,.docx,.jpg,.png" />
+                    <p>Click or drag files to upload (Max size: 2GB)</p>
+
+                    <!-- Where the file list will appear -->
+                    <ul id="fileList"></ul>
+                </div>
+
+                <!-- Total Field -->
+                <div class="Entry-Field">
+                    <label class="label" for="claimAmount">Total (R):</label>
+                    <input class="input" id="claimAmount" name="claimAmount" type="number" placeholder="0" readonly>
+                </div>
+
+            </div>
+
+            <div class="Button-Row">
+                    <!-- your fields here -->
+                    <button class="submit-button" type="submit">Submit</button>
+                    <button class="cancel-button" type="button" id="cancelBtn" onclick="window.location='@Url.Action("LecturerDash", "Lecturer")'">Cancel</button>
+            </div>
+            </form>
+
+        </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const input = document.getElementById("supportingDocuments");
+            const list = document.getElementById("fileList");
+            let selectedFiles = [];
+
+            input.addEventListener("change", () => {
+                // Merge new selections into our array
+                selectedFiles = [...selectedFiles, ...input.files];
+                renderFileList();
+                // Reset the input so the same file can be re-added if needed
+                input.value = "";
+            });
+
+            function renderFileList() {
+                list.innerHTML = "";
+                selectedFiles.forEach((file, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB) `;
+
+                    const removeBtn = document.createElement("button");
+                    removeBtn.type = "button";
+                    removeBtn.textContent = "Remove";
+                    removeBtn.onclick = () => {
+                        selectedFiles.splice(index, 1);
+                        renderFileList();
+                    };
+
+                    li.appendChild(removeBtn);
+                    list.appendChild(li);
+                });
+            }
+
+            // Optional: before form submit, rebuild a DataTransfer object
+            document.querySelector("form").addEventListener("submit", (e) => {
+                const dt = new DataTransfer();
+                selectedFiles.forEach(file => dt.items.add(file));
+                input.files = dt.files; // replace input's FileList with our curated one
+            });
+        
+            // Standardized rate constant for this iteration, future versions will calculate based on module rate
+            
+
+            const RATE = 220;
+
+            const sessionsInput = document.getElementById("sessions");
+            const totalInput = document.getElementById("claimAmount");
+
+            sessionsInput.addEventListener("input", () => {
+                const hours = parseFloat(sessionsInput.value) || 0;
+                totalInput.value = (hours * RATE).toFixed(2); // 2 decimal places
+            });
+        
+        
+            const form = document.getElementById("claimForm");
+            const cancelBtn = document.getElementById("cancelBtn");
+
+            // Handle submit
+            form.addEventListener("submit", (e) => {
+                // Basic validation example: check required fields
+                const sessions = document.getElementById("").value;
+                if (!sessions || sessions <= 0) {
+                    e.preventDefault();
+                    alert("Please enter a valid number of sessions before submitting.");
+                    return;
+                }
+
+                // If everything looks good
+                alert("Form submitted successfully!");
+                // Let the form continue to the server
+            });
+
+            // Handle cancel
+            cancelBtn.addEventListener("click", () => {
+                if (confirm("Are you sure you want to cancel this operation?")) {
+                    alert("Operation cancelled.");
+                    form.reset(); // clears the form
+                }
+            });
+            });
+    </script>
+    </body>
+</html>
