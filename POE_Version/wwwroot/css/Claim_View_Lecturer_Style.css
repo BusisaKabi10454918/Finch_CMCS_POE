@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('GlacialIndifference-Regular.woff2') format('woff2'),
+        url('GlacialIndifference-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('GlacialIndifference-Bold.woff2') format('woff2'),
+        url('GlacialIndifference-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    background-image: url(../Images/Light/Dashboard_Background_Light.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.container {
+    border-radius: 10px;
+    padding: 30px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 50vh;
+    max-height: 80vh; /* keep container within viewport */
+}    
+    
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.claims-list {
+    flex: 1;
+    overflow-y: auto; /* scrollable area */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.claim-pending {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #ff914d;
+}
+
+.claim-denied {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #ff0000;
+}
+
+.claim-approved{
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #00bf63;
+}
+
+.claim-header {
+    font-weight: bold;
+    margin-bottom: 6px;    
+}
+
+.claim-details {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.Button-Row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 10%;
+    padding-left: 10%;
+    margin-right: 10%;
+    padding-right: 10%;
+}
+
+.dispute-button {
+    background-color: #002D40;
+    color: #D9ECF2;
+    cursor: pointer;
+    border: none;
+    height: 50px;
+    width: 100px;
+    font-family: 'Glacial Indifference';
+    font-size: 15px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.return-button{
+    background-color: #002D40;
+    color: #D9ECF2;
+    cursor: pointer;
+    border: none;
+    height: 50px;
+    width: 100px;
+    font-family: 'Glacial Indifference';
+    font-size: 15px;
+    border-radius: 12px;
+}

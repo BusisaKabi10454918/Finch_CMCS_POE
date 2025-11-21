@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('GlacialIndifference-Regular.woff2') format('woff2'),
+        url('GlacialIndifference-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('GlacialIndifference-Bold.woff2') format('woff2'),
+        url('GlacialIndifference-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body{
+    background-image: url(../Images/Light/Dashboard_Background_Light.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin-top: 5%;
+    gap: 50px;
+}
+
+.Entry-field{
+    position: relative;
+    height: 100px;
+    width: 390px;
+    padding-left: 5%;
+    background-color: #D9ECF2;
+}
+
+.input{
+    background-color: #D9ECF2;
+    display: flex;
+    color: #1AA6B7;
+    width: 400px;
+    height: 50px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'Glacial Indifference';
+}
+
+.Claim-Date-Range {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+#Claim-start-date, #Claim-end-date {
+    width: 180px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'Glacial Indifference';
+}
+
+.Button-Row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 10%;
+    padding-left: 10%;
+    margin-right: 10%;
+    padding-right: 10%;
+}
+
+.submit-button {
+    background-color: #002D40;
+    color: #D9ECF2;
+    cursor: pointer;
+    border: none;
+    height: 50px;
+    width: 100px;
+    font-family: 'Glacial Indifference';
+    font-size: 15px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button{
+    background-color: #002D40;
+    color: #D9ECF2;
+    cursor: pointer;
+    border: none;
+    height: 50px;
+    width: 100px;
+    font-family: 'Glacial Indifference';
+    font-size: 15px;
+    border-radius: 30px;
+}
+
+.corner-top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: larger;
+    font-family: sans-serif;
+}
+
+.corner-top-right:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.corner-top-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: larger;
+    font-family: sans-serif;
+}
+
+.corner-top-left:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
