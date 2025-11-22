@@ -1,0 +1,122 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Feature Under Development";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"]</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Images/Light/Icons/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-image: url(../Images/Light/Dashboard_Background_Light.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Glacial Indifference', sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin: 20% 10% 0% 10%;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .page-header{
+                        text-align: center;
+            font-size: xx-large;
+            font-weight: bold;
+            color: #002D40;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            text-align: center;
+            font-size: large;
+            color: #002D40;
+        }
+
+        .return-button {
+            background-color: #002D40;
+            color: #D9ECF2;
+            border-radius: 30px;
+            width: 100px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'Glacial Indifference', sans-serif;
+            margin-left: 40%;
+            
+        }
+
+        .Button-Row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10%;
+            align-items: center;
+            margin-top: 30px;
+            margin-left: 10%;
+            padding-left: 10%;
+            margin-right: 10%;
+            padding-right: 10%;
+        }
+        
+
+        .corner-top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: larger;
+            font-family: sans-serif;
+        }
+
+        .corner-top-right:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .corner-top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: larger;
+            font-family: sans-serif;
+        }
+
+        .corner-top-left:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="corner-top-left">?</div>
+    <div class="corner-top-right">☰</div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1> Feature Under Development</h1>
+        </div>
+
+        <div class="content">
+            <p> We're working hard to bring you this feature. Please check back later!</p>
+        </div>
+
+        <div class="Button-Row">
+            <button class="return-button" onclick="window.history.back()">Go Back</button>
+        </div>
+    </div>
+</body>
+</html>

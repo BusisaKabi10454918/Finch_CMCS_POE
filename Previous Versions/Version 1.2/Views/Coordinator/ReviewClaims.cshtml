@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Claim>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Claims</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Claim_View_General_Style.css">
+    <link rel="icon" href="~/Images/Light/Icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    
+
+    <div class="container">
+        <h2 class="header">Unchecked Claims</h2>
+        <!-- Scrollable Claims List -->
+        <div class="claims-list">
+            @foreach (var claim in Model)
+            {
+                <div class="Claim">
+                    <div class="claim-header">
+                        @claim.ModuleCode | (@claim.ClaimedHours.ToString()) | (@claim.ClaimAmount.ToString())
+                    </div>
+                    <div class="claim-details">
+                        Claimant: @claim.Lecturer.FirstName @claim.Lecturer.LastName<br>
+                        ClaimID: @claim.ClaimReadID
+                    </div>
+                    <div class="claim-details">
+                        Claim Period:@claim.ClaimPeriodStart.ToString("dd/MM/yyyy") to @claim.ClaimPeriodEnd.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+            }
+            <!-- More claims will stack here and remain scrollable -->
+        </div>
+        <!-- Action Buttons -->
+    </div>
+
+    <div class="Button-Row">
+        <button class="return-button" onclick="window.history.back()"> Return</button>
+        <button class="reject-button" onclick="rejectClaim()"> Reject Claim</button>
+        <button class="approve-button" onclick="approveClaim()"> Approve Claim</button> 
+    </div>
+
+    <script>
+        function rejectClaim() {
+            const claimId = prompt("Enter Claim ID to reject:");
+            const reason = prompt("Enter reason for rejection:");
+
+            if (!claimId || !reason) return;
+
+            const formData = new URLSearchParams();
+                formData.append("claimId", claimId);
+                formData.append("reason", reason);
+
+            fetch("/Coordinator/RejectClaim", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData
+            });
+            // immediately confirm to the user
+            alert("Claim rejected successfully.");
+        }
+
+        function approveClaim() {
+            const claimId = prompt("Enter claim ID to approve:");
+            if (!claimId) return;
+            
+            const formData = new URLSearchParams();
+            formData.append("claimId", claimId);
+
+            fetch("/Coordinator/ApproveClaim", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData
+            });
+
+            alert("Claim approved!");
+        }
+        /* Not implemented yet
+        function escalateClaim() {
+            const reason = prompt("Enter reason for escalation:");
+            if (reason) {
+                alert("Claim escalated:\n" + reason);
+                // later: send to backend via fetch/POST
+            }
+        }
+        */
+    </script>
+
+        
+    
+</body>
+</html>
